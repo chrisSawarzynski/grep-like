@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
             continue;
         }
 
-        find_pattern(argv[1], content, results, &result_count);
+        find_pattern(argv[1], content, &results, &result_count);
 
         print_result(results, &result_count);
 
