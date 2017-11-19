@@ -22,7 +22,6 @@ int main(int argc, char* argv[])
         content=NULL;
         
         read_file(argv[i], &error, &content);
-        printf("Content: %s", content);
 
         if(error == 1)
         {
@@ -36,6 +35,7 @@ int main(int argc, char* argv[])
         print_result(results, &result_count);
 
         free(content);
+        free(results);
     }
     return 0;
 }
