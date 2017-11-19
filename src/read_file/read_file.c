@@ -1,5 +1,6 @@
 #include <fcntl.h>
 #include <sys/stat.h>
+#include <stdlib.h>
 #include "read_file.h"
 
 void read_file(char name[], int *error, char *content)
