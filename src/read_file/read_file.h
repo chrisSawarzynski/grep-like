@@ -1,6 +1,6 @@
 #ifndef READ_FILE
 #define READ_FILE
 
-    char *read_file(char name[]);
+    void read_file(char name[], int *error, char *content);
 
 #endif

@@ -1,7 +1,7 @@
 # config:
 
 COMPILER=gcc
-DEBUG=-g -Wall -Werror -pedantic
+DEBUG=-g
 DEPS_FLAGS=-c $(DEBUG)
 MAIN_FLAGS=$(DEBUG)
 default: main
@@ -27,7 +27,7 @@ $(PRINT_O): src/print_result/print_result.c
 	$(COMPILER) src/print_result/print_result.c $(DEPS_FLAGS) -o $(PRINT_O)
 
 main: $(MAIN_DEPS)
-	gcc $(READ_FILE) src/main.c $(MAIN_FLAGS) -o $(MAIN_O)
+	gcc $(READ_FILE) $(MAIN_DEPS) src/main.c $(MAIN_FLAGS) -o $(MAIN_O)
 
 clean:
 	rm build/*
