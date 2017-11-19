@@ -3,21 +3,24 @@
 #include <stdlib.h>
 #include "read_file.h"
 
-void read_file(char name[], int *error, char *content)
+void read_file(char name[], int *error, char **content)
 {
     int fd = open(name, O_RDONLY);
-    if (fd == -1) {
+
+    if (fd == -1) 
+    {
         *error = 1;
-        content = malloc(sizeof content * 5);
-        content="error";
+        content = malloc((sizeof *content) * 5);
+        *content="error";
         return;
     }
+
     struct stat stat_buf;
     fstat(fd, &stat_buf);
 
-    content = (char*)malloc(stat_buf.st_size);
+    *content = (char *)malloc(stat_buf.st_size);
 
-    read(fd, content, stat_buf.st_size);
+    read(fd, *content, stat_buf.st_size);
 
     close(fd);
 }

@@ -10,18 +10,19 @@ int main(int argc, char* argv[])
 {
     int i;
     int error;
+    int result_count;
     Result *results;
-    int *result_count;
     char *content;
 
     for(i=2; i<argc; i++)
     {
-        content=NULL;
-        results=NULL;
-        result_count=NULL;
         error=0;
-
-        read_file(argv[i], &error, content);
+        result_count=0;
+        results=NULL;
+        content=NULL;
+        
+        read_file(argv[i], &error, &content);
+        printf("Content: %s", content);
 
         if(error == 1)
         {
@@ -30,9 +31,9 @@ int main(int argc, char* argv[])
             continue;
         }
 
-        find_pattern(argv[1], content, results, result_count);
+        find_pattern(argv[1], content, results, &result_count);
 
-        print_result(results, result_count);
+        print_result(results, &result_count);
 
         free(content);
     }
