@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "read_file.h"
 
-void read_file(char name[], int *error, char **content)
+void read_file(const char name[], int *error, char **content)
 {
     int fd = open(name, O_RDONLY);
 
