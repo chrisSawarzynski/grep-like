@@ -10,14 +10,14 @@ int main(int argc, char* argv[])
 {
     int i;
     int error;
-    int result_count;
+    int results_count;
     Result *results;
     char *content;
 
     for(i=2; i<argc; i++)
     {
         error=0;
-        result_count=0;
+        results_count=0;
         results=NULL;
         content=NULL;
         
@@ -30,9 +30,9 @@ int main(int argc, char* argv[])
             continue;
         }
 
-        find_pattern(argv[1], content, &results, &result_count);
+        find_pattern(argv[1], content, &results, &results_count);
 
-        print_result(results, &result_count);
+        print_result(results, results_count);
     }
 
     free(content);
