@@ -10,7 +10,7 @@ void read_file(const char name[], int *error, char **content)
     if (fd == -1) 
     {
         *error = 1;
-        content = realloc(*content, (sizeof *content) * 5);
+        *content = realloc(*content, (sizeof *content) * 5);
         *content="error";
         return;
     }
@@ -18,7 +18,7 @@ void read_file(const char name[], int *error, char **content)
     struct stat stat_buf;
     fstat(fd, &stat_buf);
 
-    *content = (char *)realloc(*content, stat_buf.st_size);
+    *content = realloc(*content, stat_buf.st_size);
 
 
     read(fd, *content, stat_buf.st_size);
