@@ -3,22 +3,22 @@
 #include "find_pattern.h"
 
 
-int *compute_prefix_function(const char content[])
+int *compute_prefix_function(const char pattern[])
 {   
-    int content_length = strlen(content);
+    int pattern_length = strlen(pattern);
 
-    int *prefix = malloc( content_length * sizeof content_length);
+    int *prefix = malloc(pattern_length * sizeof pattern_length);
 
-    prefix[0] = 0;
-    int k = 0;
+    int k = -1;
+    prefix[0] = k;
     
     int q;
-    for(q=1; q<content_length; q++)
+    for(q=1; q<pattern_length; q++)
     {
-        while(k>0 && content[k] != content[q])
+        while(k>-1 && pattern[k+1] != pattern[q])
             k = prefix[k];
 
-        if(content[k] == content[q])
+        if(pattern[k+1] == pattern[q])
             k = k + 1;
 
         prefix[q] = k;
@@ -32,10 +32,10 @@ void find_pattern(const char pattern[], const char content[], Result **results, 
     int content_length = strlen(content);
     int pattern_length = strlen(pattern);
 
-    *results = realloc(*results, (sizeof (int)) * content_length);
+    *results = realloc(*results, (sizeof *results) * content_length);
 
-    int *prefix = compute_prefix_function(content);
-    int q = 0;
+    int *prefix = compute_prefix_function(pattern);
+    int q = -1;
 
     int line = 1;
 
@@ -45,20 +45,20 @@ void find_pattern(const char pattern[], const char content[], Result **results, 
         if(content[i] == '\n')
             line++;
 
-        while (q>0 && pattern[q] != content[i])
+        while (q>-1 && pattern[q+1] != content[i])
             q = prefix[q];
 
-        if(pattern[q] == content[i])
-            q = q + 1;
-        if(q == pattern_length)
+        if(pattern[q+1] == content[i])
+            q++;
+
+        if(q == pattern_length - 1)
         {
             (*results)[*results_count].line = line;
-            (*results)[*results_count].position = i - pattern_length + 1;
+            (*results)[*results_count].position = i - pattern_length + 2;
             (*results_count)++;
         }
     }
 
-    (*results_count)--;
 
     free(prefix);
 }
