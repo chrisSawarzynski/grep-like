@@ -20,7 +20,8 @@ int main(int argc, char* argv[])
         results_count=0;
         results=NULL;
         content=NULL;
-        
+
+        printf("Occurences of pattern /%s/ in file '%s':\n", argv[1], argv[i]);
         read_file(argv[i], &error, &content);
 
         if(error == 1)
